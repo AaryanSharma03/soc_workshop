@@ -274,5 +274,82 @@ Here you can see how to set these switches/parameters otherwise they are set by 
 run_floorplan
 ```
 ![Screenshot from 2024-12-30 21-05-54](https://github.com/user-attachments/assets/b8a0aee0-92df-4a54-85e9-7e82c9b297c9)
-Need not to take the warning seriously as these Source statement are not required on our end 
+Need not to take the warning seriously as these values are not required at this time
+2. Open new terminal tab and go to `Desktop/work/tools/openlane_working_dir/designs/picorv32a/runs` and open the file you are working on in my case it is `30-12_11-38` go to `results/floorplan` and simply type the following command
+```bash
+less picorv32a.floorplan.def
+```
+![Screenshot from 2024-12-30 21-51-52](https://github.com/user-attachments/assets/6bf697e7-45a1-45df-9b17-ac33b93ef3a9)
+![Screenshot from 2024-12-30 21-55-37](https://github.com/user-attachments/assets/9ee6951f-ad43-4254-80fb-632a9b49a6a4)
+3. You can see `DIEAREA ( 0 0 ) ( 660685 671405 )` `first 0` is lower left x-value and `second 0` is lower right y-value , `660685` is upper right x-value and `671405` is the upper left y-value this data can be used to calculate the die area. Unit will be the `UNITS DISTANCE MICRONS` it is data base unit per micron meaning i micron equals to `1000`. Such that you can divide `660685` `671405` by `1000` to get dimensions in microns that will be
+```math
+Width= \frac{660685}{1000} = 660.685 microns
+```
+```math
+Height= \frac{671405}{1000} = 671.405 microns
+```
+```math
+Die AREA =Height x Width
+```
+```math
+Die Area = 443587.2124 micron square
+```
+
+4. Press `Q` to return to shell and run the command 
+```bash
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+![Screenshot from 2024-12-31 00-53-03](https://github.com/user-attachments/assets/c02ba127-9bb9-4f13-8b49-1729c0953c87)
+  This is the path location for sky130A.tech, we need `picorv32a.floorplan.def` and `merged.lef` file which is two level up/behind meaning inside the `<date>` file this is done to see the actual layout of the floorplan through `Magic VLSI layout tool`
+![Screenshot from 2024-12-31 00-53-18](https://github.com/user-attachments/assets/1d1b7715-06f9-4708-ac5a-0ea309cbf15e)
+
+5. Select the layout by pressing `S` on your keyboard and then pressing `V` on your keyboard now your chip is centralised
+![Screenshot from 2024-12-31 00-53-39](https://github.com/user-attachments/assets/ef1acfab-e075-409e-9097-a8225a43d60b)
+
+6. To zoom draw the rectangle around the area you want to zoom in by pressing left click, right click  and moving mouse accordingly and finally pressing `Z` on your keyboard
+![Screenshot from 2024-12-31 00-54-05](https://github.com/user-attachments/assets/ac805188-dda8-4a0b-b0de-c5c9aa830582)
+  To select a particular object you can move your mouse toward the desired object and press `S` on your keyboard which will make it highlight
+  For more controls you can visit this link here  - [Magic TUTORIAL](https://awesomeopensource.com/project/elangosundar/awesome-README-templates](http://opencircuitdesign.com/magic/tutorials/tut1.html)
+  There is also on more window with title `tkcon 2.3 Main` to know the selected pin is in which layer you can write in tkcon.tcl window
+```bash
+what
+```
+![Screenshot from 2024-12-31 00-54-26](https://github.com/user-attachments/assets/ea1a9779-be18-4b31-9d56-005fd202d214)
+![Screenshot from 2024-12-31 00-55-19](https://github.com/user-attachments/assets/3e2fbc14-b9ee-405c-bcb3-fa8a04c634f6)
+
+7. Next step is run placement simply type and run
+```bash
+run_placement
+```
+in the main terminal where you had run your floorplan, first of all global placement whose main focus is reduction of wire length.
+You will see the half wire length below which is `overflow` and our objective reduce the overflows values which means our design converges. After the script is run placement is done.
+![Screenshot from 2024-12-31 00-45-02](https://github.com/user-attachments/assets/29083a33-c169-4cba-ae69-1a867e39fbac)
+
+8. Open new terminal tab and go to `/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/30-12_11-38/results/placement` and run the command as earlier
+```bash
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+![Screenshot from 2024-12-31 01-05-21](https://github.com/user-attachments/assets/a6ef917c-f738-459c-b4d2-22ce3f9c2ba1)
+This will open a new window by `Magic VLSI layout tool` one with name `Toplevel` and `tkcon.tcl`
+![Screenshot from 2024-12-31 01-05-57](https://github.com/user-attachments/assets/b0e0f477-584f-43eb-82db-b21d75ef6455)
+
+9. Zoom in by pressin `Z` on your keyboard to see the standard cell and rows.
+![Screenshot from 2024-12-31 01-06-42](https://github.com/user-attachments/assets/e09c62f5-15e2-45bc-ae20-d846eb25c24d)
+From this you can see how the all cells are placed
+This is all about placement
+Note: Open source floorplan doesnot create power distribution it is done post `Floorplan` and `Placement`.
+## Section 3: SKy130 Day3
+
+### Descriptions
+<details>
+  <summary>
+Expand
+  </summary>
+
+
+  </details>
+
+## Procedure
+  
+
 
