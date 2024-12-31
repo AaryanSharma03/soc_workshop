@@ -338,7 +338,8 @@ This will open a new window by `Magic VLSI layout tool` one with name `Toplevel`
 From this you can see how the all cells are placed
 This is all about placement
 Note: Open source floorplan doesnot create power distribution it is done post `Floorplan` and `Placement`.
-## Section 3: SKy130 Day3
+
+## Section 3: SKy130 Day3- Design library cell using Magic layout and ngspice characterization
 
 ### Descriptions
 <details>
@@ -349,7 +350,19 @@ Expand
 
   </details>
 
+## Implementation
+1. Doing layout simulation from the magic file in ngspice
+2. Charactersizing our sample cell
+3. We will feeding the sample cell in OpenLANE
 ## Procedure
-  
+Note: Say you want to make changes on fly in the configuration i.e. how the pins are alligned along the core before these were placed randomly equidistant to each other so there are four strategies to this.
+Say we have done synthesis stage and floorplan stage you can open the `/home/work/tools/openlane_working_dir/configuration` than simply run the command 
+```bash
+pwd
+```
+now open the `floorplan.tcl` file by running the command 
+```bash
+less floorplan.tcl
+```
 
-
+1. First you are going to download mat file .magfile
