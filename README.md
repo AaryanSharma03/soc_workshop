@@ -1,8 +1,6 @@
 
 # Digital VLSI SoC Desgin and Planning
 
-Section 1: SKy130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK SoC Design and OpenLANE
-
 ## Section 1: SKy130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK SoC Design and OpenLANE
 
 ### Descriptions
@@ -397,6 +395,38 @@ in the original terminal window.gg
   <summary>
 Expand
   </summary>
+1. First of all you have to download ngspice on your windows desktop, you can simply download it by searching ngspice on google
+![Screenshot (482)](https://github.com/user-attachments/assets/6bcf5c4a-1d92-47ed-b4b3-a49fd8f0870f).
+![Screenshot (483)](https://github.com/user-attachments/assets/0f33ab9f-b5d9-4997-b88f-21a6f361a7e8).
+![Screenshot (484)](https://github.com/user-attachments/assets/9f515eb4-115b-4985-815c-25e9d0aa2655).
+![Screenshot (485)](https://github.com/user-attachments/assets/685f0919-00dc-43d0-9ed9-36b822ec5c9d).
+2. After the download is complete extract the downloaded zip file into a location of your choice
+3. Create a circuit i.e. 
+  First create component connectivity
+![Inverter](https://github.com/user-attachments/assets/4ef82ff6-9144-4796-a13e-63f34f888037).
+  Appoint components value
+![Inverter (1)](https://github.com/user-attachments/assets/de55ac2b-6d24-4d85-a8bc-3cd46062b2d2).
+  Identify the nodes and name them (nodes are basically points which defines a component between them)
+![Inverter (2)](https://github.com/user-attachments/assets/8ead1d81-507d-4460-841e-2890c32b4db7).
+4. Now you can create your `.cir` file using this reference `MODEL Decriptions` `NETLIST Description` can be generated and appropriate `SIMULATION Commands` can be issued
+```javascript
+  *** MODEL Descriptions ***
+  *** NETLIST Description ***
+  M1 out in vdd vdd pmos W=0.375u L=0.25u
+  M2 out in 0 0 nmos W=0.375u L=0.25u
+
+  cload out 0 10f
+
+  Vdd vdd 0 2.5
+  Vin in 0 2.5
+  *** SIMULATION Commands ***
+  .op
+  .dc Vin 0 2.5 0.05
+  *** .include tsmc_025um_model.mod ***
+  .LIB "tsmc_025um_model.mod" CMOS_MODELS
+  .end
+```
+ ![Screenshot (486)](https://github.com/user-attachments/assets/6c7c867a-0ad3-4e4a-b73a-a883f6d4a33b)
 
 
   </details>
