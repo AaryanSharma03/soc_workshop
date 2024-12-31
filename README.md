@@ -391,10 +391,6 @@ in the original terminal window.gg
 
 ### NGSPICE
 
-<details>
-  <summary>
-Expand
-  </summary>
 1. First of all you have to download ngspice on your windows desktop, you can simply download it by searching ngspice on google
 ![Screenshot (482)](https://github.com/user-attachments/assets/6bcf5c4a-1d92-47ed-b4b3-a49fd8f0870f).
 ![Screenshot (483)](https://github.com/user-attachments/assets/0f33ab9f-b5d9-4997-b88f-21a6f361a7e8).
@@ -408,15 +404,13 @@ Expand
 ![Inverter (1)](https://github.com/user-attachments/assets/de55ac2b-6d24-4d85-a8bc-3cd46062b2d2).
   Identify the nodes and name them (nodes are basically points which defines a component between them)
 ![Inverter (2)](https://github.com/user-attachments/assets/8ead1d81-507d-4460-841e-2890c32b4db7).
-4. Now you can create your `.cir` file using this reference `MODEL Decriptions` `NETLIST Description` can be generated and appropriate `SIMULATION Commands` can be issued
+4. Now you can create your `.cir` file using this reference `MODEL Decriptions` `NETLIST Description` can be generated and appropriate `SIMULATION Commands` can be issued this whole process can be done on notepad.
 ```javascript
   *** MODEL Descriptions ***
   *** NETLIST Description ***
   M1 out in vdd vdd pmos W=0.375u L=0.25u
   M2 out in 0 0 nmos W=0.375u L=0.25u
-
   cload out 0 10f
-
   Vdd vdd 0 2.5
   Vin in 0 2.5
   *** SIMULATION Commands ***
@@ -426,9 +420,244 @@ Expand
   .LIB "tsmc_025um_model.mod" CMOS_MODELS
   .end
 ```
- ![Screenshot (486)](https://github.com/user-attachments/assets/6c7c867a-0ad3-4e4a-b73a-a883f6d4a33b)
+NOTE: When saving your file make sure `save as type` is selected as `All files (*.*)` in my case i saved my file in same folder as ngspice
+ ![Screenshot (486)](https://github.com/user-attachments/assets/6c7c867a-0ad3-4e4a-b73a-a883f6d4a33b).
+5. Do same for the model file save it as `.mod` file type in notepad
+```javascript
+  * SPICE 3f5 Level 8, Star-HSPICE Level 49, UTMOST Level 8
+
+.lib cmos_models
+
+* DATE: Feb 23/01
+
+* LOT: T0BM WAF: 07
+
+* Temperature_parameters=Default
+
+.MODEL nmos NMOS ( LEVEL = 49
+
++VERSION = 3.1 TNOM = 27 TOX = 5.8E-9
+
++XJ = 1E-7 NCH = 2.3549E17 VTH0 = 0.3907535
+
++K1 = 0.4376003 K2 = 8.265151E-3 K3 = 4.214601E-3
+
++K3B = -3.7220937 W0 = 2.517345E-6 NLX = 2.310668E-7
+
++DVT0W = 0 DVT1W = 0 DVT2W = 0
+
++DVT0 = 0.2411602 DVT1 = 0.3707226 DVT2 = -0.5
+
++U0 = 316.5922683 UA = -9.89493E-10 UB = 2.154013E-18
+
++UC = 2.474632E-11 VSAT = 1.254499E5 A0 = 1.2735648
+
++AGS = 0.2428704 B0 = 2.579719E-8 B1 = -1E-7
+
++KETA = 4.87168E-4 A1 = 0 A2 = 0.5196633
+
++RDSW = 120 PRWG = 0.5 PRWB = -0.2
+
++WR = 1 WINT = 2.357855E-8 LINT = 1.210018E-9
+
++DWG = 2.292632E-9
+
++DWB = -9.94921E-10 VOFF = -0.1039771 NFACTOR = 1.3905578
+
++CIT = 0 CDSC = 2.4E-4 CDSCD = 0
+
++CDSCB = 0 ETA0 = 3.894977E-3 ETAB = 7.800632E-4
+
++DSUB = 0.0307944 PCLM = 1.7312397 PDIBLC1 = 0.999135
+
++PDIBLC2 = 4.850036E-3 PDIBLCB = -0.0866866 DROUT = 0.8612131
+
++PSCBE1 = 7.995844E10 PSCBE2 = 1.457011E-8 PVAG = 0.0099984
+
++DELTA = 0.01 RSH = 5 MOBMOD = 1
+
++PRT = 0 UTE = -1.5 KT1 = -0.11
+
++KT1L = 0 KT2 = 0.022 UA1 = 4.31E-9
+
++UB1 = -7.61E-18 UC1 = -5.6E-11 AT = 3.3E4
+
++WL = 0 WLN = 1 WW = -1.22182E-16
+
++WWN = 1.2127 WWL = 0 LL = 0
+
++LLN = 1 LW = 0 LWN = 1
+
++LWL = 0 CAPMOD = 2 XPART = 0.4
+
++CGDO = 3.11E-10 CGSO = 3.11E-10 CGBO = 1E-12
+
++CJ = 1.741905E-3 PB = 0.9876681 MJ = 0.4679558
+
++CJSW = 3.653429E-10 PBSW = 0.99 MJSW = 0.2943558
+
++CF = 0 PVTH0 = -0.01 PRDSW = 0
+
++PK2 = 2.589681E-3 WKETA = -1.866069E-3 LKETA = -0.0166961 )
+
+*
+
+.MODEL pmos PMOS ( LEVEL = 49
+
++VERSION = 3.1 TNOM = 27 TOX = 5.8E-9
+
++XJ = 1E-7 NCH = 4.1589E17 VTH0 = -0.583228
+
++K1 = 0.5999865 K2 = 6.150203E-3 K3 = 0
+
++K3B = 3.6314079 W0 = 1E-6 NLX = 1E-9
+
++DVT0W = 0 DVT1W = 0 DVT2W = 0
+
++DVT0 = 2.8749516 DVT1 = 0.7488605 DVT2 = -0.0917408
+
++U0 = 136.076212 UA = 2.023988E-9 UB = 1E-21
+
++UC = -9.26638E-11 VSAT = 2E5 A0 = 0.951197
+
++AGS = 0.20963 B0 = 1.345599E-6 B1 = 5E-6
+
++KETA = 0.0114727 A1 = 3.851541E-4 A2 = 0.614676
+
++RDSW = 1.496983E3 PRWG = -0.0440632 PRWB = -0.2945454
+
++WR = 1 WINT = 7.879211E-9 LINT = 2.894523E-8
+
++DWG = -1.112097E-8
+
++DWB = 9.815716E-9 VOFF = -0.1204623 NFACTOR = 1.2259401
+
++CIT = 0 CDSC = 2.4E-4 CDSCD = 0
+
++CDSCB = 0 ETA0 = 0.3325261 ETAB = -0.0623452
+
++DSUB = 0.9206875 PCLM = 0.833903 PDIBLC1 = 9.948506E-4
+
++PDIBLC2 = 0.0191187 PDIBLCB = -1E-3 DROUT = 0.9938581
+
++PSCBE1 = 2.887413E10 PSCBE2 = 8.325891E-9 PVAG = 0.8478443
+
++DELTA = 0.01 RSH = 3.6 MOBMOD = 1
+
++PRT = 0 UTE = -1.5 KT1 = -0.11
+
++KT1L = 0 KT2 = 0.022 UA1 = 4.31E-9
+
++UB1 = -7.61E-18 UC1 = -5.6E-11 AT = 3.3E4
+
++WL = 0 WLN = 1 WW = 0
+
++WWN = 1 WWL = 0 LL = 0
+
++LLN = 1 LW = 0 LWN = 1
+
++LWL = 0 CAPMOD = 2 XPART = 0.4
+
++CGDO = 2.68E-10 CGSO = 2.68E-10 CGBO = 1E-12
+
++CJ = 1.864957E-3 PB = 0.976468 MJ = 0.4614408
+
++CJSW = 3.118281E-10 PBSW = 0.6870843 MJSW = 0.3021929
+
++CF = 0 PVTH0 = 6.397941E-3 PRDSW = 30.410214
+
++PK2 = 2.100359E-3 WKETA = 5.428923E-3 LKETA = -0.0111599 )
+
+*
+
+.endl
+```
+ ![Screenshot (487)](https://github.com/user-attachments/assets/07694889-eac0-4c3d-9183-53889134e184)
+ 
+6. Everything is ready now open the  `ngspice.exe` file in `Spice64\bin`
+![Screenshot (488)](https://github.com/user-attachments/assets/76cc0221-af15-4dd8-970a-a98aa4e6ee7d)
+![Screenshot (489)](https://github.com/user-attachments/assets/ce5d9b1a-209a-4176-842d-9471174734d1)
+7. Now open the current directory where you saved your  `.cir` and  `.mod` file using  `cd` command
+8. Source your `.cir` file in my case i have named it as `cmosVTS_PMOSwidth_NMOSwidth.cir` file
+```bash
+source cmosVTS_PMOSwidth_NMOSwidth.cir
+```
+![Screenshot (491)](https://github.com/user-attachments/assets/6a73b767-1ffd-421e-b3e9-a0b58376419a)
+![Screenshot (492)](https://github.com/user-attachments/assets/d01d7809-0bb6-4814-bd1a-c5c4293ad3df)
+9. Now execute the circuit by simply typing
+```bash
+run
+```
+![Screenshot (492)](https://github.com/user-attachments/assets/d2a21955-273a-4af2-acf7-006d74fc2d43)
+```bash
+set plot
+```
+![Screenshot (493)](https://github.com/user-attachments/assets/da6d15bb-9a0a-4582-a907-170f75f0c4fc)
+![Screenshot (494)](https://github.com/user-attachments/assets/f1df147e-7173-440a-b843-748d61531667)
+this will give you the variables for which you can plot graphs, in our case we will be working on `dc level` for DC Transfer Characterstics so run the command
+```bash
+set plot dc1
+```
+```bash
+display
+```
+![Screenshot (495)](https://github.com/user-attachments/assets/e8a2188a-2aa7-4d77-afa2-ac1b9be56ec3)
+
+10. Finally run the command
+```bash
+plot out vs in
+```
+![Screenshot (496)](https://github.com/user-attachments/assets/63ffb1ef-5b31-4eef-8d00-e09cde5de530)
+This waveform will be generated which represents the `DC Transfer Characterstics` for `output` versus `input` v
+![Screenshot (497)](https://github.com/user-attachments/assets/153fed95-b633-4acb-b966-64ffbc7e7f62)
+NOTE: That the waveform is shifted in left, ideally it should be symmetrical this is because same size of nmos and pmos for our circuit now let us increase the pmos `W/L` to `2.5` means previously for both pmos and nmos `W/L` was `1.5` now it has been increased in pmos. 
+11. Create new `.cir` file with pmos having  `W=0.9375u` 
+```javascript
+*** MODEL Descriptions ***
+*** NETLIST Description ***
+M1 out in vdd vdd pmos W=0.9375u L=0.25u
+M2 out in 0 0 nmos W=0.375u L=0.25u
+
+cload out 0 10f
+
+Vdd vdd 0 2.5
+Vin in 0 2.5
+*** SIMULATION Commands ***
+.op
+.dc Vin 0 2.5 0.05
+*** .include tsmc_025um_model.mod ***
+.LIB "tsmc_025um_model.mod" CMOS_MODELS
+.end
+```
+12. Open the same `NGSPICE` Interface hit `ENTER` and source this new `.cir` file, in my case i have named it as `cmosVTS_PMOSwidth_2.5NMOSwidth.cir`
+```bash
+source cmosVTS_PMOSwidth_2.5NMOSwidth.cir
+```
+![Screenshot (498)](https://github.com/user-attachments/assets/0d919e01-57c6-47f4-a8e3-4ad0a8d4e3a0)
+13. Repeat the same procedure by running the command 
+```bash
+run
+```
+```bash
+setplot
+```
+```bash
+setplot dc2
+```
+NOTE: This time we are setting plot for new `dc2` not previous `dc1` characterstics
+```bash
+display
+```
+![Screenshot (499)](https://github.com/user-attachments/assets/c088a176-41cf-475d-9e3a-52ab084b96ce)
+```bash
+plot out vs in
+```
+
+![Screenshot (500)](https://github.com/user-attachments/assets/c14d6096-6b44-4a03-ad42-99bb687de44f)
+The difference is clear as day now the `DC Transfer Characterstics` are more symmetrical and centralised
 
 
-  </details>
+
+
 
 1. First you are going to download mat file .magfile
