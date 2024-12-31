@@ -307,7 +307,7 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 6. To zoom draw the rectangle around the area you want to zoom in by pressing left click, right click  and moving mouse accordingly and finally pressing `Z` on your keyboard
 ![Screenshot from 2024-12-31 00-54-05](https://github.com/user-attachments/assets/ac805188-dda8-4a0b-b0de-c5c9aa830582)
   To select a particular object you can move your mouse toward the desired object and press `S` on your keyboard which will make it highlight
-  For more controls you can visit this link here  - [Magic TUTORIAL](https://awesomeopensource.com/project/elangosundar/awesome-README-templates](http://opencircuitdesign.com/magic/tutorials/tut1.html)
+  For more controls you can visit this link here  - [Magic TUTORIAL](http://opencircuitdesign.com/magic/tutorials/tut1.html)
   There is also on more window with title `tkcon 2.3 Main` to know the selected pin is in which layer you can write in tkcon.tcl window
 ```bash
 what
@@ -399,12 +399,18 @@ in the original terminal window.gg
 2. After the download is complete extract the downloaded zip file into a location of your choice
 3. Create a circuit i.e. 
   First create component connectivity
+
 ![Inverter](https://github.com/user-attachments/assets/4ef82ff6-9144-4796-a13e-63f34f888037).
+
   Appoint components value
+  
 ![Inverter (1)](https://github.com/user-attachments/assets/de55ac2b-6d24-4d85-a8bc-3cd46062b2d2).
+
   Identify the nodes and name them (nodes are basically points which defines a component between them)
+  
 ![Inverter (2)](https://github.com/user-attachments/assets/8ead1d81-507d-4460-841e-2890c32b4db7).
-4. Now you can create your `.cir` file using this reference `MODEL Decriptions` `NETLIST Description` can be generated and appropriate `SIMULATION Commands` can be issued this whole process can be done on notepad.
+
+5. Now you can create your `.cir` file using this reference `MODEL Decriptions` `NETLIST Description` can be generated and appropriate `SIMULATION Commands` can be issued this whole process can be done on notepad.
 ```javascript
   *** MODEL Descriptions ***
   *** NETLIST Description ***
