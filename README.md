@@ -353,9 +353,9 @@ Expand
 ## Implementation
 1. Doing layout simulation from the magic file in ngspice
 2. Charactersizing our sample cell
-3. We will feeding the sample cell in OpenLANE
+3. We will plugin the sample cell in OpenLANE
 ## Procedure
-Note: Say you want to make changes on fly in the configuration i.e. how the pins are alligned along the core before these were placed randomly equidistant to each other so there are four strategies to this.
+Note: Say you want to make changes on fly in the configuration i.e. how the pins are alligned along the core before these were placed randomly equidistant to each other so there are four strategies supported by the `IO Placer` which is a opensource EDA tool.
 Say we have done synthesis stage and floorplan stage you can open the `/home/work/tools/openlane_working_dir/configuration` than simply run the command 
 ```bash
 pwd
@@ -364,5 +364,41 @@ now open the `floorplan.tcl` file by running the command
 ```bash
 less floorplan.tcl
 ```
+![Screenshot from 2024-12-31 23-09-01](https://github.com/user-attachments/assets/f81e5436-512a-4055-859a-4185cebebabf)
+From running above commands you will get to new window where you can see various variables you can change accordingly let us say we want to change the IO pin mode so there is a line `set ::env(FP_IO_MODE) 1; # 0 matching mode - 1 random equidistant mode` it mentions `0 matching mode` - `1 random equidistant mode` do not worry there is 2 mode also that is not visible. Come back to your original terminal window and run the following command
+```bash
+set ::env(FP_IO_MODE) 2
+```
+![Screenshot from 2024-12-31 23-08-56](https://github.com/user-attachments/assets/973de9e2-7d2d-4927-abb0-1a2ecfc1ce5b)
+Now run the floorplan again in the same terminal
+```bash
+run_floorplan
+```
+You can view the changes by `Magic Layout Tool` by running the command in `step 4` of `section-2`  in directory 
+```bash
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/<date>/results/floorplan
+```
+```bash
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+Magic VLSI Layout Tool will open and you can view the changes there now ins will be stacked over each other. 
+You can just reset the changes by running the following commands
+```bash
+set ::env(FP_IO_MODE) 1
+```
+```bash
+run_floorplan
+```
+in the original terminal window.gg 
+
+### NGSPICE
+
+<details>
+  <summary>
+Expand
+  </summary>
+
+
+  </details>
 
 1. First you are going to download mat file .magfile
