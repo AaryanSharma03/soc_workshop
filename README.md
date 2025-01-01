@@ -662,8 +662,40 @@ plot out vs in
 ![Screenshot (500)](https://github.com/user-attachments/assets/c14d6096-6b44-4a03-ad42-99bb687de44f)
 The difference is clear as day now the `DC Transfer Characterstics` are more symmetrical and centralised
 
+## Static Behaviour: CMOS Inverter Robustness
+# Switching Threshold, Vm
+Vm is point where Vin=Vout
+The graphs we earlier plotted represented switching
+![Screenshot 2025-01-01 171856](https://github.com/user-attachments/assets/469187a2-883a-4116-8195-055e08b03079)
+We can conclude a lot of current leaks to the ground during switch from rise to fall, we shall derive this switching threshold. It is a great oppurtunity to calculate the Rise and Fall `delay` with different switching threshold, `Vm`
+```math
+Vm = \R.Vdd/(1+R)
+```
+where
+```math
+R=\frac{Kp.Vdsatp}{Kn.Vdsatn} = \frac{\frac{Wp}{Lp}.Kp'.Vdsatp}{\frac{Wn}{Ln}.Kn'.Vdsatn}
+```
+```math
+\frac{\frac{Wp}{Lp}}{\frac{Wp}{Lp}} = \frac{Kn'.Vdsatn([Vm-Vt])\ - \frac{Vdsatn}{2}}{Kp'.Vdsatp([-Vm+Vdd+Vt])\ + \frac{Vdsatp}{2}}
+```
+1. Keeping the configuration as same before 'cmosVTS_PMOSwidth_NMOSwidth.cir` Except this time input will be impulse and we will be running transit time analysis
+  ```bash
+*** MODEL Descriptions ***
+*** NETLIST Description ***
+M1 out in vdd vdd pmos W=0.375u L=0.25u
+M2 out in 0 0 nmos W=0.375u L=0.25u
 
+cload out 0 10f
 
+Vdd vdd 0 2.5
+Vin in 0 0 pulse 0 2.5 0 10p 10p 1n 2n
 
+*** SIMULATION Commands ***
+.op
+.trans 10p 4n 
+*** .include tsmc_025um_model.mod ***
+.LIB "tsmc_025um_model.mod" CMOS_MODELS
+.end
+```
 
 1. First you are going to download mat file .magfile
