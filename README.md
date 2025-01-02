@@ -777,7 +777,7 @@ Fall Delay = 2.07665ns - 2.005ns = 0.07165ns
 Fall Delay = 71.65ps
 ```
 This all was done for the values of `Wp=Wn=0.375` and `Lp=Ln=0.25` or you can say `Wp/Lp=Wn/Ln=1.5` now let us vary the pmos channel width and recalculate the `Switching Threshold` `Rise Delay` and `Fall Delay`
-#Wp | #Lp | #Wn | #Ln | #Wp/Lp | #xWn/Ln |
+Wp | Lp | Wn | Ln | Wp/Lp | xWn/Ln |
 --- | --- | --- | --- | --- | --- |
 0.375 | 0.25 | 0.375 | 0.25 | 1.5 | 1.5 | 
 0.750 | 0.25 | 0.375 | 0.25 | 3.0 | 1.5 |  
@@ -785,15 +785,16 @@ This all was done for the values of `Wp=Wn=0.375` and `Lp=Ln=0.25` or you can sa
 1.500 | 0.25 | 0.375 | 0.25 | 6.0 | 1.5 | 
 1.875 | 0.25 | 0.375 | 0.25 | 7.5 | 1.5 | 
 
-To calculate the values again we would have to repeat the above procedures again the difference is only that we have to change `W (width)` of pmos channel in the `.cir` file and run the SPICE simulation here are the log files and `Vout` vs `Vin` plot of each node. First let us calculate switching threshold for each node
+To calculate the values again we would have to repeat the above procedures again the difference is only that we have to change `W (width)` of pmos channel in the `.cir` file and run the SPICE simulation here are the log files and `Vout` vs `Vin` plot of each node. First let us calculate switching threshold for each node.
+
 I. Node `Wp/Lp=3.0` and `Wn/Ln=1.5`
 ![Screenshot (521)](https://github.com/user-attachments/assets/23b5697a-61e7-4c50-be72-bafc5c316c9f)
 ![Screenshot (522)](https://github.com/user-attachments/assets/4ffa20c9-e528-49b3-b4f4-def0fefa3c6d)
 ![Screenshot 2025-01-02 225656](https://github.com/user-attachments/assets/34614c08-b5f5-4597-8ecb-0bd17d39ecb8)
-Vout versus Vin plot (above)
+  Vout versus Vin plot (above)
 ![Screenshot 2025-01-02 223826](https://github.com/user-attachments/assets/fe6e82a2-64bf-49d0-a86f-58a7d79f07a0)
 ![Screenshot 2025-01-02 224122](https://github.com/user-attachments/assets/497d850e-5129-43f5-9e6b-45b4db9b3a04)
-where `Vin` = `Vout` is the switching threshold voltage `Vm`
+  where `Vin` = `Vout` is the switching threshold voltage `Vm`
 ```math
 Vm = 1.15182
 ```
@@ -801,33 +802,34 @@ II. Node `Wp/Lp=4.5` and `Wn/Ln=1.5`
 ![Screenshot (523)](https://github.com/user-attachments/assets/d12b6c75-e7b3-447f-9387-6293ea8a7cf2)
 ![Screenshot (524)](https://github.com/user-attachments/assets/c88cef18-8e58-40cb-a6e3-13ab045c1659)
 ![Screenshot 2025-01-02 225808](https://github.com/user-attachments/assets/46a44b50-9f3f-4e77-811e-24702d5adceb)
-Vout versus Vin plot (above)
+  Vout versus Vin plot (above)
 ![Screenshot 2025-01-02 224425](https://github.com/user-attachments/assets/89216c5d-a54b-4019-a449-bf62e729b172)
 ![Screenshot 2025-01-02 224537](https://github.com/user-attachments/assets/57a8678c-b087-41b5-9884-4f5c085500c8)
-where `Vin` = `Vout` is the switching threshold voltage `Vm`
+  where `Vin` = `Vout` is the switching threshold voltage `Vm`
 ```math
 Vm = 1.25109
 ```
 III. Node `Wp/Lp=6.0` and `Wn/Ln=1.5`
 ![Screenshot (526)](https://github.com/user-attachments/assets/e28ef0cb-561c-45d5-a154-d04856d18860)
-Vout versus Vin plot (above)
+  Vout versus Vin plot (above)
 ![Screenshot 2025-01-02 225037](https://github.com/user-attachments/assets/1f786633-6fb4-4c20-b9e2-83b5422bec47)
-where `Vin` = `Vout` is the switching threshold voltage `Vm`
+  where `Vin` = `Vout` is the switching threshold voltage `Vm`
 ```math
 Vm = 1.32053
 ```
 IV. Node `Wp/Lp=7.5` and `Wn/Ln=1.5`
 ![Screenshot (528)](https://github.com/user-attachments/assets/8f3fbb59-482c-4b57-beef-05542b3d51bc)
-Vout versus Vin plot (above)
+  Vout versus Vin plot (above)
 ![Screenshot 2025-01-02 225331](https://github.com/user-attachments/assets/12a3ca45-0f6f-4f2c-8e9f-693390042d99)
-where `Vin` = `Vout` is the switching threshold voltage `Vm`
+  where `Vin` = `Vout` is the switching threshold voltage `Vm`
 ```math
 Vm = 1.37326
 ```
-Now let us calculate the `Rise Delay` and `Fall Delay` for each node 
+  Now let us calculate the `Rise Delay` and `Fall Delay` for each node 
+
 I. Node `Wp/Lp=3.0` and `Wn/Ln=1.5`
 ![Screenshot (529)](https://github.com/user-attachments/assets/1cb6b73e-e06c-485b-a5f3-5a0fd8cf349f)
-Values are 1.01494e-09, 1.09526e-09, 2.00493e-09, 2.08101e-09
+  Values are 1.01494e-09, 1.09526e-09, 2.00493e-09, 2.08101e-09
 ```math
 Rise Delay = 1.09526ns - 1.01494ns = 0.08032ns
 ```
@@ -845,7 +847,7 @@ Fall Delay = 76.08ps
 
 II. Node `Wp/Lp=4.5` and `Wn/Ln=1.5`
 ![Screenshot (530)](https://github.com/user-attachments/assets/d703c486-e72d-43f4-977a-d07e0548e1fb)
-Values are 1.01483e-09, 1.07169e-09, 2.00478e-09, 2.08507e-09
+  Values are 1.01483e-09, 1.07169e-09, 2.00478e-09, 2.08507e-09
 ```math
 Rise Delay = 1.07169ns - 1.01483ns = 0.05685ns
 ```
@@ -863,7 +865,7 @@ Fall Delay = 80.29ps
 
 III. Node `Wp/Lp=6.0` and `Wn/Ln=1.5`
 ![Screenshot (531)](https://github.com/user-attachments/assets/4190745d-11fb-46e8-8cc2-eb19b3043870)
-Values are 1.01481e-09, 1.0599e-09, 2.00484e-09, 2.08903e-09
+  Values are 1.01481e-09, 1.0599e-09, 2.00484e-09, 2.08903e-09
 ```math
 Rise Delay = 1.0599ns - 1.01481ns = 0.04509ns
 ```
@@ -881,7 +883,7 @@ Fall Delay = 84.19ps
 
 IV. Node `Wp/Lp=7.5` and `Wn/Ln=1.5`
 ![Screenshot (532)](https://github.com/user-attachments/assets/e1131769-68b3-45c1-89c5-c153abfbf9ec)
-Values are 1.015e-09, 1.05275e-09, 2.00484e-09, 2.09339e-09
+  Values are 1.015e-09, 1.05275e-09, 2.00484e-09, 2.09339e-09
 ```math
 Rise Delay = 1.015ns - 1.05275ns = 0.03775ns
 ```
@@ -898,12 +900,14 @@ Fall Delay = 88.55ps
 ![Screenshot 2025-01-02 235420](https://github.com/user-attachments/assets/7a43ec26-30a8-4bc3-95f2-a19e11c31939)
 
 
-#Wp | #Lp | #Wn | #Ln | #Wp/Lp | #xWn/Ln | #Vm(Switching Threshold in Volts) | #Rise Delay (ps) | #Fall Delay (ps) |
+Wp | Lp | Wn | Ln | Wp/Lp | xWn/Ln | Vm(Switching Threshold in Volts) | Rise Delay (ps) | Fall Delay (ps) |
 --- | --- | --- | --- | --- | --- | --- | --- | --- |
 0.375 | 0.25 | 0.375 | 0.25 | 1.5 | 1.5 | 0.9912 | 148.21 | 71.65 |
 0.750 | 0.25 | 0.375 | 0.25 | 3.0 | 1.5 | 1.15182 | 80.32 | 76.08 | 
 1.125 | 0.25 | 0.375 | 0.25 | 4.5 | 1.5 | 1.25109 | 56.85 | 80.29 | 
 1.500 | 0.25 | 0.375 | 0.25 | 6.0 | 1.5 | 1.32053 | 45.09 | 84.19 |
 1.875 | 0.25 | 0.375 | 0.25 | 7.5 | 1.5 | 1.37326 | 37.75 | 88.55 |
+
+
  
 1. First you are going to download mat file .magfile
