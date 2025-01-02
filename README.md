@@ -1,4 +1,4 @@
-
+![Screenshot (517)](https://github.com/user-attachments/assets/061d78b5-3fd1-44c1-95ae-a18303e97c64)
 # Digital VLSI SoC Desgin and Planning
 
 ## Section 1: SKy130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK SoC Design and OpenLANE
@@ -669,7 +669,7 @@ The graphs we earlier plotted represented switching
 ![Screenshot 2025-01-01 171856](https://github.com/user-attachments/assets/469187a2-883a-4116-8195-055e08b03079)
 We can conclude a lot of current leaks to the ground during switch from rise to fall, we shall derive this switching threshold. It is a great oppurtunity to calculate the Rise and Fall `delay` with different switching threshold, `Vm`
 ```math
-Vm = \R.Vdd/(1+R)
+Vm = R.Vdd/(1+R)
 ```
 where
 ```math
@@ -697,5 +697,141 @@ Vin in 0 0 pulse 0 2.5 0 10p 10p 1n 2n
 .LIB "tsmc_025um_model.mod" CMOS_MODELS
 .end
 ```
+where Vin is now given as an impulse and we know the impulse is function of time
+2. Save it as `.cir` file with different name in my case it is `cmosVTS_PMOSwidth_NMOSwidthTranAnalysis.cir` and keep the location same as previous files
 
+![Impulse](https://github.com/user-attachments/assets/b2b5f909-4741-4748-a051-ade0d390ddce)
+
+3. Now run the file 'cmosVTS_PMOSwidth_NMOSwidth.cir` as `step 8` to `step 9`.
+4. Finally run the command
+```bash
+plot out vs in in
+```
+![Screenshot (503)](https://github.com/user-attachments/assets/57bfb8df-219b-4fc7-a50b-b857e268f9fa)
+Open the plot window now zoom into the plot, hold right click and draw rectangle around the desired region two to three times for increased accuracy
+![Screenshot (504)](https://github.com/user-attachments/assets/d912c82b-59f8-42d7-8dcb-13afc4092a44)
+![Screenshot (505)](https://github.com/user-attachments/assets/c18f8053-9e39-4683-9942-2267584f2859)
+5. Select thee point at which `Vin` and `Vout` interacts and open the ngspice terminal there will be coordinates of the selected point
+![Screenshot 2025-01-02 184938](https://github.com/user-attachments/assets/c73dca51-cf3c-4e73-93a4-a56999d99fea)
+As discussed this point is where `Vin` and `Vout` is equal which also means it is the switching threshold voltage `Vm`
+```math
+Vm = 0.9912
+```
+6. Now run the `cmosVTS_PMOSwidth_NMOSwidthTranAnalysis.cir` file
+```bash
+source cmosVTS_PMOSwidth_NMOSwidthTranAnalysis.cir
+```
+![Screenshot (507)](https://github.com/user-attachments/assets/8b941c9c-65c9-4c28-98d2-d472d5932f57)
+```bash
+run```
+```bash
+setplot
+```
+![Screenshot (508)](https://github.com/user-attachments/assets/2e0cd60c-739b-4eea-a209-860defcb5daa)
+![Screenshot (509)](https://github.com/user-attachments/assets/30f3ae7f-a54a-4367-8d9b-eb06def96951)
+it will represent the available plots and you can see there is transient time plot which you need to run.
+```bash
+setplot tran2
+```
+```bash
+display
+```
+![Screenshot (510)](https://github.com/user-attachments/assets/76191538-1800-48b0-b7bc-af0c1c921027)
+7. Finally run the command
+```bash
+plot out vs time in
+```
+![Screenshot (511)](https://github.com/user-attachments/assets/b381bae7-2302-4476-b22a-64a725dbc8b8)
+![Screenshot (512)](https://github.com/user-attachments/assets/6d32e24e-b0f8-4a50-a4cb-a1a6290596ad)
+8. Maximize the plot window and now to calculate the rise delay and fall delay we will choose half voltage values of each plot `Vin` and inverter output `Vout`
+![Screenshot (513)](https://github.com/user-attachments/assets/646e29e6-f249-4e51-a5e6-bc31f10e55a4)
+9. Zoom into the first region near `1.25V` axis and find out the coordinates of `Vin` and `Vout` at this `1.25V` axis. To zoom just click right mouse button, hold and draw.
+![Screenshot (514)](https://github.com/user-attachments/assets/38e1a3bf-cc0c-4d05-ba61-109b37da0dda)
+![Screenshot (515)](https://github.com/user-attachments/assets/2d5ee794-b840-48ad-a389-5f0474661322)
+To know the coordinates of the location just click that point and view the ngspice window with latest output. Select the point of Vin=1.25V and view the coordinates in ngspice window.
+![Screenshot 2025-01-02 190132](https://github.com/user-attachments/assets/375c71b6-2244-40a0-ae94-1c0e38a36e8c)
+So on viewing the ngspice we come to know that Vin=1.25V at time = 1.01474e^-09,
+next by selecting at Vout=1.25V. 
+![Screenshot (517)](https://github.com/user-attachments/assets/9d8c12c9-e582-4127-bff5-ec0390773744)
+![Screenshot 2025-01-02 190307](https://github.com/user-attachments/assets/f4499625-ca0d-4997-8613-49c6d86d66f5)
+So on viewing the ngspice we come to know that Vout=1.25V at time = 1.16295e^-09, knowing the time at rising Vout with respect to Vin we calculate the `rise delay` as below:
+```math
+Rise Delay = 1.16295ns - 1.01474ns = 0.14821ns
+```
+```math
+Rise Delay = 148.21ps
+```
+10. Similarly zoom into the next region and find out the coordinates of `Vin` and `Vout`of time at `1.25V` axis.
+![Screenshot (518)](https://github.com/user-attachments/assets/1084f945-5444-4148-b643-d042d90ee3a4)
+Select the point of Vin=1.25V and view the coordinates in ngspice window.
+![Screenshot (519)](https://github.com/user-attachments/assets/381257f9-36ab-4ed9-a57c-d712708ecb4a)
+![Screenshot 2025-01-02 190838](https://github.com/user-attachments/assets/2d777da4-7669-4e3a-b68a-d9a0014c1be5)
+So on viewing the ngspice we come to know that Vin=1.25V at time = 2.005e^-09,
+next by selecting at Vout=1.25V. 
+![Screenshot (520)](https://github.com/user-attachments/assets/d288f9a4-2572-40cd-8ec4-f64bb8498011)
+![Screenshot 2025-01-02 190956](https://github.com/user-attachments/assets/f512c43a-b9d4-4867-a171-f15db50ae948)
+So on viewing the ngspice we come to know that Vout=1.25V at time = 2.07665e^-09, knowing the time at rising Vout with respect to Vin we calculate the `fall delay` as below:
+```math
+Fall Delay = 2.07665ns - 2.005ns = 0.07165ns
+```
+```math
+Fall Delay = 71.65ps
+```
+This all was done for the values of `Wp=Wn=0.375` and `Lp=Ln=0.25` or you can say `Wp/Lp=Wn/Ln=1.5` now let us vary the pmos channel width and recalculate the `Switching Threshold` `Rise Delay` and `Fall Delay`
+#Wp | #Lp | #Wn | #Ln | #Wp/Lp | #xWn/Ln |
+--- | --- | --- | --- | --- | --- |
+0.375 | 0.25 | 0.375 | 0.25 | 1.5 | 1.5 | 
+0.750 | 0.25 | 0.375 | 0.25 | 3.0 | 1.5 |  
+1.125 | 0.25 | 0.375 | 0.25 | 4.5 | 1.5 |  
+1.500 | 0.25 | 0.375 | 0.25 | 6.0 | 1.5 | 
+1.875 | 0.25 | 0.375 | 0.25 | 7.5 | 1.5 | 
+
+To calculate the values again we would have to repeat the above procedures again the difference is only that we have to change `W (width)` of pmos channel in the `.cir` file and run the SPICE simulation here are the log files and `Vout` vs `Vin` plot of each node
+Node `Wp/Lp=3.0` and `Wn/Ln=1.5`
+![Screenshot (521)](https://github.com/user-attachments/assets/23b5697a-61e7-4c50-be72-bafc5c316c9f)
+![Screenshot (522)](https://github.com/user-attachments/assets/4ffa20c9-e528-49b3-b4f4-def0fefa3c6d)
+![Screenshot 2025-01-02 225656](https://github.com/user-attachments/assets/34614c08-b5f5-4597-8ecb-0bd17d39ecb8)
+Vout versus Vin plot (above)
+![Screenshot 2025-01-02 223826](https://github.com/user-attachments/assets/fe6e82a2-64bf-49d0-a86f-58a7d79f07a0)
+![Screenshot 2025-01-02 224122](https://github.com/user-attachments/assets/497d850e-5129-43f5-9e6b-45b4db9b3a04)
+where `Vin` = `Vout` is the switching threshold voltage `Vm`
+```math
+Vm = 1.15182
+```
+Node `Wp/Lp=4.5` and `Wn/Ln=1.5`
+![Screenshot (523)](https://github.com/user-attachments/assets/d12b6c75-e7b3-447f-9387-6293ea8a7cf2)
+![Screenshot (524)](https://github.com/user-attachments/assets/c88cef18-8e58-40cb-a6e3-13ab045c1659)
+![Screenshot 2025-01-02 225808](https://github.com/user-attachments/assets/46a44b50-9f3f-4e77-811e-24702d5adceb)
+Vout versus Vin plot (above)
+![Screenshot 2025-01-02 224425](https://github.com/user-attachments/assets/89216c5d-a54b-4019-a449-bf62e729b172)
+![Screenshot 2025-01-02 224537](https://github.com/user-attachments/assets/57a8678c-b087-41b5-9884-4f5c085500c8)
+where `Vin` = `Vout` is the switching threshold voltage `Vm`
+```math
+Vm = 1.25109
+```
+Node `Wp/Lp=6.0` and `Wn/Ln=1.5`
+![Screenshot (526)](https://github.com/user-attachments/assets/e28ef0cb-561c-45d5-a154-d04856d18860)
+Vout versus Vin plot (above)
+![Screenshot 2025-01-02 225037](https://github.com/user-attachments/assets/1f786633-6fb4-4c20-b9e2-83b5422bec47)
+where `Vin` = `Vout` is the switching threshold voltage `Vm`
+```math
+Vm = 1.32053
+```
+Node `Wp/Lp=7.5` and `Wn/Ln=1.5`
+![Screenshot (528)](https://github.com/user-attachments/assets/8f3fbb59-482c-4b57-beef-05542b3d51bc)
+Vout versus Vin plot (above)
+![Screenshot 2025-01-02 225331](https://github.com/user-attachments/assets/12a3ca45-0f6f-4f2c-8e9f-693390042d99)
+where `Vin` = `Vout` is the switching threshold voltage `Vm`
+```math
+Vm = 1.37326
+```
+
+#Wp | #Lp | #Wn | #Ln | #Wp/Lp | #xWn/Ln | #Vm(Switching Threshold in Volts) | #Rise Delay (ps) | #Fall Delay (ps) |
+--- | --- | --- | --- | --- | --- | --- | --- | --- |
+0.375 | 0.25 | 0.375 | 0.25 | 1.5 | 1.5 | 0.9912 | 148.21 | 71.65 |
+0.750 | 0.25 | 0.375 | 0.25 | 3.0 | 1.5 | 1.15182 | | | 
+1.125 | 0.25 | 0.375 | 0.25 | 4.5 | 1.5 | 1.25109 | | | 
+1.500 | 0.25 | 0.375 | 0.25 | 6.0 | 1.5 | 1.32053 | | |
+1.875 | 0.25 | 0.375 | 0.25 | 7.5 | 1.5 | 1.37326 | | |
+ 
 1. First you are going to download mat file .magfile
