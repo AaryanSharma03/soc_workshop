@@ -432,7 +432,7 @@ in the original terminal window.gg
 NOTE: When saving your file make sure `save as type` is selected as `All files (*.*)` in my case i saved my file in same folder as ngspice
  ![Screenshot (486)](https://github.com/user-attachments/assets/6c7c867a-0ad3-4e4a-b73a-a883f6d4a33b).
 5. Do same for the model file save it as `.mod` file type in notepad
-```javascript
+```bash
   * SPICE 3f5 Level 8, Star-HSPICE Level 49, UTMOST Level 8
 
 .lib cmos_models
@@ -912,6 +912,35 @@ Wp | Lp | Wn | Ln | Wp/Lp | xWn/Ln | Vm(Switching Threshold in Volts) | Rise Del
 1.500 | 0.25 | 0.375 | 0.25 | 6.0 | 1.5 | 1.32053 | 45.09 | 84.19 |
 1.875 | 0.25 | 0.375 | 0.25 | 7.5 | 1.5 | 1.37326 | 37.75 | 88.55 |
 
-
+## 
  
-1. First you are going to download mat file .magfile
+1. First you are going to download .magfile this file is available at
+```bash
+https://github.com/nickson-jose/vsdstdcelldesign.git
+```
+copy the link
+2. Open the command terminal and open the openlane directory, run
+```bash
+git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+```
+this will download the neseccary files for our next stage
+3. Ensure everything is downloaded by running command
+``bash
+ls -ltr
+```
+```bash
+pwd
+```
+![Screenshot from 2025-01-03 04-03-55](https://github.com/user-attachments/assets/75469c08-1477-4154-bb45-cf976e92f000)
+
+copy the location as we now need to copy the `.tech` file to this new file
+4. Open the `skywater130A.tech` file present in pdks folder
+![Screenshot from 2025-01-03 04-05-46](https://github.com/user-attachments/assets/c4044170-3cb9-45ac-844a-518769bc1bcb)
+5. Run the `.mag` file with the command 
+```bash
+magic -T sky130A.tech sky130_inv.mag &
+```
+![Screenshot from 2025-01-03 04-10-05](https://github.com/user-attachments/assets/0804b678-6068-42ef-9324-71a248e8560b)
+This will open the `Magic Tool`
+![Screenshot from 2025-01-03 04-10-12](https://github.com/user-attachments/assets/e00cfcb9-a06b-4be8-84be-b1ae22b0c92a)
+
