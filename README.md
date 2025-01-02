@@ -1,5 +1,9 @@
 # Digital VLSI SoC Desgin and Planning
+![Static Badge](https://img.shields.io/badge/OS-linux%2C_Windows-orange)
+![Static Badge](https://img.shields.io/badge/EDA%20Tools-OpenLANE--Flow%2C_Yosys%2C_abc%2C_OpenROAD%2C_TritonRoute%2C_OpenSTA%2C_magic%2C_netgen%2C_GUNA-purple)
+![Static Badge](https://img.shields.io/badge/languages-verilog%2C_bash%2C_TCL-blue)
 
+> 2 Week digital VLSI SoC design and planning workshop with complete RTL2GDSII flow
 ## Section 1: SKy130 Day1- Inception of open-source EDA, OpenLANE and Sky130 PDK SoC Design and OpenLANE
 
 ### Descriptions
