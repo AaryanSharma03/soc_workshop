@@ -944,3 +944,7 @@ magic -T sky130A.tech sky130_inv.mag &
 This will open the `Magic Tool`
 ![Screenshot from 2025-01-03 04-10-12](https://github.com/user-attachments/assets/e00cfcb9-a06b-4be8-84be-b1ae22b0c92a)
 
+  Red strip -> Polysilcon
+  Source of `PMOS` is connected to the Vdd the source of the `NMOS` is connected to the `ground` and `drain` of `PMOS` and `NMOS` is connected to the `output` also `gate` of nmos and pmos are connected to `input`
+  Let us understand the 
+
