@@ -1013,5 +1013,46 @@ box
   ![Screenshot from 2025-01-04 14-46-14](https://github.com/user-attachments/assets/0328749f-9900-4316-a897-e14127f85f0c)
 
 13. Edit the `.spice` file with correct scaling values
-14. Now we have to include the `.lib` files that can be found in the same directory of `/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign`
+14. Now we have to include the `.lib` files that can be found in the same directory of `/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign` that can be found in the same directory within `libs` 
+![Screenshot from 2025-01-04 15-18-49](https://github.com/user-attachments/assets/d0ea4035-00f9-4dfd-a579-b61a799b87af)
+15. Now back to the `.spice` file type
+```bash
+.include ./libs/pshort.lib
+.include ./libs/nshort.lib
+```
+One more thing to notice is that in this `.spice` file `Vgnd` and `Vpwr` are not defined 
+16. Comment out the lines and, define the power and ground as shown
+![Screenshot from 2025-01-04 15-23-04](https://github.com/user-attachments/assets/bc928b20-9b55-4cf1-83c1-2233d6b1d619)
+
+Or simply copy paste the below file
+```bash
+.option scale=0.010u
+.include ./libs/pshort.lib
+.include ./libs/nshort.lib
+
+//.subckt sky130_inv A Y VPWR VGND
+X0 Y A VGND VGND nshort_model.0 ad=1.44n pd=0.152m as=1.37n ps=0.148m w=35 l=23
+X1 Y A VPWR VPWR pshort_model.0 ad=1.44n pd=0.152m as=1.52n ps=0.156m w=37 l=23
+VDD VPwR 0 3.3V
+VSS VGND 0 0V
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
+C0 VPWR A 0.0774f
+C1 Y A 0.0754f
+C2 VPWR Y 0.117f
+C3 Y VGND 0.279f
+C4 A VGND 0.45f
+C5 VPWR VGND 0.781f
+.tran 1n 20n
+.control
+.endc
+.end
+//.ends
+```
+17. Now run the command and pass the `.spice` file into it
+    ```bash
+    ngspice skywater130_inv.spice
+    ```
+
+# Magic VLSI
+Before starting simulation first let us know about magic [Click Here](http://opencircuitdesign.com/magic/)
 
