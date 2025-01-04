@@ -1054,5 +1054,85 @@ C5 VPWR VGND 0.781f
     ```
 
 # Magic VLSI
-Before starting simulation first let us know about magic [Click Here](http://opencircuitdesign.com/magic/)
+Before starting simulation first let us know about magic by a lab [Click Here](http://opencircuitdesign.com/magic/)
 
+
+1. Run the command to download a file
+   ```bash
+   wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+   ```
+   This will download the required file.
+![Screenshot from 2025-01-04 18-20-31](https://github.com/user-attachments/assets/bb14799e-aabf-4c78-8a2e-23776ae6b97c)
+
+2. Now type the following command
+```bash
+  tar xfz drc_tests.tgz
+```
+3. Open the `drc_tests` and view its content by running
+   ```bash
+   ls -ltr
+   ```
+   ![Screenshot from 2025-01-04 19-10-30](https://github.com/user-attachments/assets/2d56df23-d994-4323-a6fe-9724ee7a5f86)
+
+4. To view the .tech file locally you can run the command
+   ```bash
+   vi .magicrc
+   ```
+5. To start magic you just type (for better graphics `XR` is chosen)
+  ```bash
+  magic -d XR
+  ```
+6. In the layout view open any file
+![Screenshot from 2025-01-04 19-19-14](https://github.com/user-attachments/assets/abcc0919-80c1-4688-ba2f-de0c92fdf2d1)
+![Screenshot from 2025-01-04 19-19-55](https://github.com/user-attachments/assets/dc013fc6-b355-414e-8742-293e45c11e8e)
+In my case `Met3 (m3)
+![Screenshot from 2025-01-04 19-20-08](https://github.com/user-attachments/assets/8a398f86-35fc-48e6-8559-9553937f9e1f)
+Each of these examples have a unique name which calls for its rule no. and description in skywater130 documentation, to view the rules you can navigate to the site and open the `periphereal rules` for `met3`
+You can verify all the errors by selecting the desired block and running the command
+[Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)
+```bash
+drc why
+```
+![Screenshot from 2025-01-04 19-36-51](https://github.com/user-attachments/assets/4163f3f7-d118-4e1d-8c24-b30b2c23e2b9)
+7. Select any region in m3contact, to do this select a region, hover to the side bar palette and choose the `m3contact` layer by pressing the `scrollbar` on your mouse and you can clearly see DRC is non-zero value
+![Screenshot from 2025-01-04 19-47-13](https://github.com/user-attachments/assets/8f5da1cf-d3a6-411e-95fe-5f2e49ecd159)
+
+8. Run the command
+```bash
+cif see VIA2
+```
+From the rules the `via2` distance enclosed by `met3` 
+![Screenshot from 2025-01-04 21-01-16](https://github.com/user-attachments/assets/101ad028-1012-4adc-80dc-0b4e1189f020)
+
+![Screenshot from 2025-01-04 19-47-59](https://github.com/user-attachments/assets/a7913aa0-b07f-46b6-8f11-b7d903813365)
+Actualy these contact cuts are the mask for VIA2 these are defined by certain rules
+
+9. Type the command
+    ```bash
+    box
+    ```
+   this will you provide you with the width between VIA2 and contact cut
+   ![Screenshot from 2025-01-04 20-52-06](https://github.com/user-attachments/assets/f5aa0ff0-a858-4c2c-abc7-404fb830cee3)
+  You can see that distance is never less than 0.065um
+   ```bash
+   feed clear
+   ```
+   To clear the changes
+10. Now we will find the error ourselve and try to resolve it run the command
+    ```bash
+    load poly
+    ```
+    ![Screenshot from 2025-01-04 22-20-28](https://github.com/user-attachments/assets/d4f40704-eb20-41aa-9f4a-609aedcffdd3)
+
+11. djafk, as the name suggests the poly.9 represents the distance between polysilicon and polyresistor which should be obeying the rule
+    ![Screenshot from 2025-01-04 22-26-16](https://github.com/user-attachments/assets/41fc1d95-be66-4293-a6fd-b960c59c6c20)
+    ![Screenshot from 2025-01-04 22-27-09](https://github.com/user-attachments/assets/58382325-235e-4105-949f-14012b877086)
+12. `*poly` poly and all types containing poly
+    ![Screenshot from 2025-01-04 22-41-10](https://github.com/user-attachments/assets/1a2decba-7659-426e-b637-27d9547cb49d)
+
+13. Run the command
+    ```bash
+    drc check
+    ```
+    now you can see that all these spacing rules has been fixed
+    
