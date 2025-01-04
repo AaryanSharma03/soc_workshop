@@ -946,5 +946,61 @@ This will open the `Magic Tool`
 
   Red strip -> Polysilcon
   Source of `PMOS` is connected to the Vdd the source of the `NMOS` is connected to the `ground` and `drain` of `PMOS` and `NMOS` is connected to the `output` also `gate` of nmos and pmos are connected to `input`
-  Let us understand the 
+  There are different layers present at right side by hovering over any layer you can read its description on the toolbar
+  ![Screenshot from 2025-01-04 12-03-37](https://github.com/user-attachments/assets/3ee626f5-3ad9-4ed4-9956-69cd80b9bbf3)
+  Select the region you want know about by just pressing `S` on your keyboard and run the command `what` in tkcon window, in my case
+  ![Screenshot from 2025-01-04 12-11-59](https://github.com/user-attachments/assets/9ab9803b-a1c2-4d66-aec1-6f48e5cea87a)
+  ![Screenshot from 2025-01-04 12-14-40](https://github.com/user-attachments/assets/f137d67e-75aa-488d-bf81-458f852da017)
+  For checking the interconnection you can click `S` thrice on your keyboard
+  ![Screenshot from 2025-01-04 12-19-08](https://github.com/user-attachments/assets/be95642d-efd8-454a-8a09-11d16fee0209)
+  ![Screenshot from 2025-01-04 12-19-08](https://github.com/user-attachments/assets/de75bd57-985d-4f00-89cd-0f6fcd80ccab)
+  You can see that port `Y` is connected to `drain` of both `PMOS` and `NMOS`
+  From above you can see that Drain of both nmos and pmos are connected, similarly you can verify the connections
+  ![Screenshot from 2025-01-04 12-22-58](https://github.com/user-attachments/assets/ffa37128-c750-461a-a70a-917932139584)
+  Here you can see that `nmos` source is connected to the `GND`
+  You can know more about the layer by simply typing 
+  ```bash
+property
+```
+```bash
+box
+```
+  ![Screenshot from 2025-01-04 12-26-20](https://github.com/user-attachments/assets/13c276c0-7533-4550-8728-99cac83d5452)
+  This will provide you with the dimensions of the inverter cell
+  You can also check for errors if `DRC=0` than it is fine if you see `DRC` non zero you can get more info on `tkcon` console by clicking `DRC` in toolbar and then selecting `DRC find next error`
+  For more information [Documentation Here](https://github.com/nickson-jose/vsdstdcelldesign/blob/master/README.md)
+  To simulate this framework in `NGSpice` we need to extract the layer
+6. Run the command, before we have to know the location of the exracted file so first run the command
+```bash
+pwd
+```
+and then
+``` bash
+extract all
+```
+![Screenshot from 2025-01-04 12-47-07](https://github.com/user-attachments/assets/4cb7176d-d1b6-4113-b75c-b631a513d6bc)
+
+7. Verify that file was created in the location
+![Screenshot from 2025-01-04 12-50-42](https://github.com/user-attachments/assets/117732eb-3e2f-422f-a554-23cd5efe1bcc)
+
+8. To be used by `NGSpice` we have to create `.spice` file so type the commands
+```bash
+ext2spice cthresh 0 rthresh 0
+```
+![Screenshot from 2025-01-04 12-53-10](https://github.com/user-attachments/assets/6d5ad0b8-b06a-48c3-a873-da608df0ce2b)
+
+This will kill the parasatic capacitance
+9. Run the command
+```bash
+ext2spice
+```
+![Screenshot from 2025-01-04 12-58-08](https://github.com/user-attachments/assets/e6fea847-8cc7-41b5-947d-514614f49c27)
+10. Verify the file with `.spice` type was created 
+![Screenshot from 2025-01-04 12-58-17](https://github.com/user-attachments/assets/dff22ddf-d73b-44c3-be12-ab601931355c)
+
+11. open the file by simply typing
+```bash
+vim skywater130_inv.spice
+```
+![Screenshot from 2025-01-04 13-04-03](https://github.com/user-attachments/assets/6f2c9aa7-6c7d-45f4-a5cf-d3c3188e94b6)
 
