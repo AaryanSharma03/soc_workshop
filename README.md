@@ -1004,3 +1004,14 @@ vim skywater130_inv.spice
 ```
 ![Screenshot from 2025-01-04 13-04-03](https://github.com/user-attachments/assets/6f2c9aa7-6c7d-45f4-a5cf-d3c3188e94b6)
 
+12. To start with simmulation we will have to do correct scaling in `.spice` file back to your magic tool zoom into the layer till you can select the smallest grid block on the layout, if grid is not visible you can turn it on from the windows option in the toolbar
+and run the command 
+```bash
+box
+```
+  This will provide you with the dimensions in my case it is `0.010` microns
+  ![Screenshot from 2025-01-04 14-46-14](https://github.com/user-attachments/assets/0328749f-9900-4316-a897-e14127f85f0c)
+
+13. Edit the `.spice` file with correct scaling values
+14. Now we have to include the `.lib` files that can be found in the same directory of `/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign`
+
