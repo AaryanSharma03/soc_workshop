@@ -1123,16 +1123,140 @@ Actualy these contact cuts are the mask for VIA2 these are defined by certain ru
     load poly
     ```
     ![Screenshot from 2025-01-04 22-20-28](https://github.com/user-attachments/assets/d4f40704-eb20-41aa-9f4a-609aedcffdd3)
+    Rules for `poly.9`
+    ![Screenshot from 2025-01-07 19-39-58](https://github.com/user-attachments/assets/fa83a71d-9f84-43b3-a264-734825a70c98)
 
-11. djafk, as the name suggests the poly.9 represents the distance between polysilicon and polyresistor which should be obeying the rule
+
+12. Make changes as shown below, as the name suggests the poly.9 represents the distance between polysilicon and polyresistor which should be obeying the rule
     ![Screenshot from 2025-01-04 22-26-16](https://github.com/user-attachments/assets/41fc1d95-be66-4293-a6fd-b960c59c6c20)
     ![Screenshot from 2025-01-04 22-27-09](https://github.com/user-attachments/assets/58382325-235e-4105-949f-14012b877086)
-12. `*poly` poly and all types containing poly
+13.  we will be replacing with `*poly`( means poly contents and all types containing poly)
     ![Screenshot from 2025-01-04 22-41-10](https://github.com/user-attachments/assets/1a2decba-7659-426e-b637-27d9547cb49d)
+14. Now press `Shift + Z` on your keyboard to save and quit file
+15. Run the following command
+    ```bash
+    tech load sky130A.tech
+    ```
+    This will show some warnings but dont worry we only changed the DRC rules
+    Due to this `DRC` engine has to be run again to fix the spacing rules
+    ![Screenshot from 2025-01-07 20-00-23](https://github.com/user-attachments/assets/3b16cb43-4ff0-4000-b8cc-68ea540b1099)
 
-13. Run the command
+14. Run the command
     ```bash
     drc check
     ```
-    now you can see that all these spacing rules has been fixed
-    
+    ![Screenshot from 2025-01-07 20-00-34](https://github.com/user-attachments/assets/63ce832f-c3cf-401c-a12f-cf1aa15bc906)
+    This rule only defined the distance of polyres from polydif or polycap
+15. To check rules violation we need to test by using variety of configuration you can do this by copying the three resistors and pasting them
+    To do this draw selection area to the three resistors now go to edit and select option select area and press `C` on your keyboard to paste them where you want
+    ![Screenshot from 2025-01-07 20-13-24](https://github.com/user-attachments/assets/5a86b8ef-5406-4dcc-b029-4d44efd9e1e2)
+    ![Screenshot from 2025-01-07 20-18-28](https://github.com/user-attachments/assets/0bef6f84-6b0e-41e6-ba8f-4cea7006cd8b)
+16. Process now includes
+    ![Screenshot from 2025-01-07 20-20-26](https://github.com/user-attachments/assets/820a3883-680c-40e2-adb3-f4b83708783b)
+  ![Screenshot from 2025-01-07 22-15-32](https://github.com/user-attachments/assets/c0c7f456-1121-4a88-a6ce-d4fd3ecb9d68)
+  ![Screenshot from 2025-01-07 22-19-07](https://github.com/user-attachments/assets/a41105bd-9a46-4e3e-b6bf-68c112c3dd85)
+  ![Screenshot from 2025-01-07 22-20-48](https://github.com/user-attachments/assets/210ede4e-6778-4e95-ba82-da9fca09395b)
+  ![Screenshot from 2025-01-07 22-21-02](https://github.com/user-attachments/assets/1431608e-fe33-449e-bcf7-ab57f02ec019)
+
+17. Now for finding incorrect rule and to fix it, Incorrectly implemented nwell.4 complex rule correction
+    ![Screenshot from 2025-01-07 22-25-40](https://github.com/user-attachments/assets/327a9f29-09db-48db-b4f8-08945aa45159)
+    ![Screenshot from 2025-01-07 22-42-38](https://github.com/user-attachments/assets/fe9a36a4-e5fd-4418-a8cc-416f5660a936)
+    ![Screenshot from 2025-01-07 22-43-07](https://github.com/user-attachments/assets/adf511c4-b43c-465c-924a-89e003dd7e30)
+    tech file description
+    ![Screenshot from 2025-01-07 22-43-32](https://github.com/user-attachments/assets/afafe5be-360f-447b-a798-8f5df254d659)
+    ![Screenshot from 2025-01-07 22-49-41](https://github.com/user-attachments/assets/0e344a1a-96b0-4649-b713-9522ab53877e)
+18. To see the error
+  ![Screenshot from 2025-01-07 22-48-05](https://github.com/user-attachments/assets/82d079e3-3b00-4739-9e33-ff58d2ceb9f0)
+  ![Screenshot from 2025-01-07 22-50-22](https://github.com/user-attachments/assets/fa488575-3718-4743-b051-76b58e4cd7ed)
+  ![Screenshot from 2025-01-07 22-54-07](https://github.com/user-attachments/assets/b6603e86-ebe7-4dd4-a17a-d6fb2a1c4425)
+  ![Screenshot from 2025-01-07 22-54-18](https://github.com/user-attachments/assets/a58b494c-5508-4983-a418-b8988c3ea3dc)
+19. Create templayer
+    ![Screenshot from 2025-01-07 23-02-57](https://github.com/user-attachments/assets/a8d774dd-b098-4d5d-8cbd-dfdc3560596a)
+    ![Screenshot from 2025-01-07 23-05-35](https://github.com/user-attachments/assets/283cf12f-c3a4-4311-a881-a3807ea1956d)
+    ![Screenshot from 2025-01-07 23-07-50](https://github.com/user-attachments/assets/752708e6-2c67-438d-a89c-5f12f1a16f15)
+20. Open the magic tool
+    ![Screenshot from 2025-01-07 22-57-24](https://github.com/user-attachments/assets/577301c0-7180-4a1d-8c10-8694e65e4464)
+21. Run the commands as follow
+    ```bash
+    drc check
+    ```
+    ```bash
+    drc style "drc(full)"
+    ```
+    ```bash
+    drc check
+    ```
+    ![Screenshot from 2025-01-07 23-15-52](https://github.com/user-attachments/assets/5aadceef-794f-4624-a859-1134612566ad)
+22. Problem can be solved by tapped contacts
+    ![Screenshot from 2025-01-07 23-16-44](https://github.com/user-attachments/assets/3538cfea-59c6-4af0-bfbe-cc6609e48e89)
+    ![Screenshot from 2025-01-07 23-17-59](https://github.com/user-attachments/assets/ef8d05eb-df5b-4980-949e-5dc90979faa5)
+
+## Section 4: SKy130 Day4- Pre-layout timing analysis and importance of good clock tree
+# Guidelines to follow while introducing cell into picorv32a
+1. Input and Output port must lie on intersection of the vertical and horizontal track
+2. The width of the standard cell should be odd multiple of track pitch and height should be odd multiple of track vertical pitch
+  (Tracks are actually traces of metal for routing)
+# Verification to check guidline 1
+1. View the `.mag` file
+  ![Screenshot from 2025-01-07 23-24-26](https://github.com/user-attachments/assets/13bd371c-b8a2-4872-84e9-fe77bcaba02b)
+  ![Screenshot from 2025-01-07 23-25-26](https://github.com/user-attachments/assets/284bd8c1-247d-4c84-80d1-6b829c89854e)
+  All the information about this cell is in `.lef` file
+2. Open the `track.info` file
+  ![Screenshot from 2025-01-07 23-44-23](https://github.com/user-attachments/assets/5cc6d493-5e4c-4e34-92cf-64a42da0fea2)
+  ![Screenshot from 2025-01-07 23-44-25](https://github.com/user-attachments/assets/78c05645-8960-4216-8d6d-186508b364c0)
+
+3. Now make the grids value match to those in track file in tkcon window    
+  ![Screenshot from 2025-01-07 23-46-48](https://github.com/user-attachments/assets/4997ae2e-0068-4b19-b868-066332ab204a)
+4. Verify that output ports are at the intersection of vertical and horizontal axis
+  ![Screenshot from 2025-01-07 23-47-01](https://github.com/user-attachments/assets/eb1f3bf9-8ab6-4405-89dc-6e5bebe9bef4)
+  ![Screenshot from 2025-01-07 23-47-26](https://github.com/user-attachments/assets/368c5fea-8f23-4a13-b497-59117e6f57bd)
+
+# Verification to check guidline 2
+1. Measure the no. of boxes lying inside the cell boundaries
+   ![Screenshot from 2025-01-07 23-55-46](https://github.com/user-attachments/assets/0f8fa3c7-e074-4fd8-bce6-864e958028a5)
+2. Verify that no. of boxese count upto odd number in my case it is 3 boxes same procedure for height
+   Ports are defined as pins while extraction of .lef files for more information [Documentation Here](https://github.com/nickson-jose/vsdstdcelldesign/blob/master/README.md) , in our case ports are already defined
+
+1. Save the file before working on it
+  ![Screenshot from 2025-01-08 00-08-47](https://github.com/user-attachments/assets/9198d2be-da0b-4e13-8d16-6cbf32d67c36)
+2. Run the command in the same terminal
+   ```bash
+   magic -T sky130A.tech sky130_vsdinv.mag &
+   ```
+   ![Screenshot from 2025-01-08 00-17-16](https://github.com/user-attachments/assets/54671721-5423-4cab-942d-fa1c86906b01)
+
+3. Extract the .lef file
+```bash
+lef write
+```
+  ![Screenshot from 2025-01-08 00-19-03](https://github.com/user-attachments/assets/b7d78c12-6715-46d9-8b89-66c1446b9c36)
+4. Verify that file has been created
+  ![Screenshot from 2025-01-08 00-20-45](https://github.com/user-attachments/assets/359b524e-fd8d-46d8-b3fe-7c6e5ee9faeb)
+
+
+1. Copy the `.lef` file into
+   ![Screenshot from 2025-01-08 00-25-25](https://github.com/user-attachments/assets/cb86b815-d617-4823-a22e-961c7769df89)
+   and verify
+   ![Screenshot from 2025-01-08 00-33-23](https://github.com/user-attachments/assets/adce3dcb-6a3f-4d05-b272-e4f0de46ed97)
+2. Now copy the `.lib` file and verify
+   ![Screenshot from 2025-01-08 00-41-09](https://github.com/user-attachments/assets/82fe297f-6ca1-40c5-bfbf-142778a2a4df)
+   ![Screenshot from 2025-01-08 00-41-20](https://github.com/user-attachments/assets/9f2979a1-cf75-41b4-a55d-ad94491ca40e)
+3. Modify `config.tcl` file
+   ![Screenshot from 2025-01-08 00-56-35](https://github.com/user-attachments/assets/4c5b182b-44f6-4255-83ae-f69b227bb7b6)
+4. Run the command in dir `openlane`
+   ```bash
+   docker
+   ```
+  ```bash
+  ./flow.tcl -interactive
+  ```
+   ```bash
+  package require openlane 0.9
+   ```
+5. Copy the file name you want to work on in my case it is `30-12_11-38`
+   ![Screenshot from 2025-01-08 01-09-26](https://github.com/user-attachments/assets/a95756d1-c1b1-4dc0-ab6c-b528b55feb05)
+6. Run the command
+  ```bash
+prep -design picorv32a -tag 30-12_11-38 -overwrite
+```
+![Screenshot from 2025-01-08 02-02-54](https://github.com/user-attachments/assets/a5e979ae-a13c-441e-933c-0a8ed9a43086)
