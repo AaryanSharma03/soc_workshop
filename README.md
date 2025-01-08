@@ -1260,3 +1260,49 @@ lef write
 prep -design picorv32a -tag 30-12_11-38 -overwrite
 ```
 ![Screenshot from 2025-01-08 02-02-54](https://github.com/user-attachments/assets/a5e979ae-a13c-441e-933c-0a8ed9a43086)
+1. Perform post-CTS timing analysis using OpenROAD.
+2. Modify the `CTS_CLK_BUFFER_LIST` and rerun the timing analysis.
+
+## Day 5: Power Distribution and Routing
+
+# Task 1: Generating Power Distribution Network (PDN)
+1. Restart synthesis and generate the PDN using the following command:
+    ```tcl
+    gen_pdn
+    ```
+
+2. Load the PDN DEF file in Magic using the following steps:
+    - Open Magic.
+    - Load the PDN DEF file.
+
+# Task 2: Performing Routing
+1. Continue from power distribution to perform routing.
+2. Load the routed DEF file in Magic.
+
+# Task 3: Extracting SPEF and Performing Timing Analysis
+1. Change directory to the SPEF extractor tool:
+    ```bash
+    cd Desktop/work/tools/SPEF_EXTRACTOR
+    ```
+2. Extract the SPEF file using the following command:
+    ```bash
+    python3 main.py /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/[your run file name]/tmp/merged.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/[your run file name]/results/routing/picorv32a.def
+    ```
+
+# Task 4: Running Post-Routing Timing Analysis
+1. Use OpenROAD\u2019s integrated OpenSTA to perform timing analysis with the extracted SPEF file.
+
+## Final Steps: RTL to GDSII
+1. Complete the final steps for RTL to GDSII conversion using TritonRoute and OpenSTA.
+2. Perform parasitic extraction, power analysis, and final verification.
+
+---
+This document outlines the detailed steps required to go from RTL design to GDSII using OpenLane for the `picorv32a` design. Follow the steps carefully and verify each stage before proceeding to the next.
+"""
+
+# Saving the content to a file
+file_path = '/mnt/data/rtl2gds_readme.txt'
+with open(file_path, 'w') as file:
+    file.write(file_content)
+
+file_path
