@@ -1259,6 +1259,11 @@ lef write
   ```bash
 prep -design picorv32a -tag 30-12_11-38 -overwrite
 ```
+To reduce skew time Change the following variables as shown in the screenshots below:
+  SYNTH_STRATEGY
+  SYNTH_BUFFERING
+  SYNTH_SIZING
+  SYNTH_DRIVING_CELL
 ![Screenshot from 2025-01-08 02-02-54](https://github.com/user-attachments/assets/a5e979ae-a13c-441e-933c-0a8ed9a43086)
 1. Perform post-CTS timing analysis using OpenROAD.
 2. Modify the `CTS_CLK_BUFFER_LIST` and rerun the timing analysis.
