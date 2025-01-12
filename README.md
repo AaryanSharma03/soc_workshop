@@ -1311,3 +1311,10 @@ with open(file_path, 'w') as file:
     file.write(file_content)
 
 file_path
+### Certificate of Completion:
+![8_VSD_nasscom Workshop Certificate 2025GitHub Repo_page-0001](https://github.com/user-attachments/assets/2d928dd0-e308-4489-a5de-8be2643610e1)
+
+### Acknowledgements:
+1. [Kunal Ghosh](https://github.com/kunalg123)
+2. [R. Timothy Edwards](https://github.com/RTimothyEdwards)
+3. [Nickson Jose](https://github.com/nickson-jose)
